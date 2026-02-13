@@ -3,29 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Login</title>
+    <title>Valentine's Day</title>
     <style>
         body { font-family: Arial, sans-serif; }
-        .login-container { 
-            width: 300px; 
-            margin: auto; 
-            padding: 20px; 
-            border: 1px solid #ccc; 
-            border-radius: 5px; 
-            box-shadow: 2px 2px 12px #aaa; 
-        }
-        h2 { text-align: center; }
-        input[type="password"] { width: 100%; padding: 10px; margin-bottom: 10px; }
-        input[type="submit"] { width: 100%; padding: 10px; }
+        header { background: pink; padding: 10px; text-align: center; }
+        nav a { margin: 0 15px; text-decoration: none; color: red; }
+        section { margin: 20px; }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <header>
+        <h1>Valentine's Day Celebration</h1>
+        <nav>
+            <a href="#login">Login</a>
+            <a href="#poem">Poem</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#music">Music</a>
+            <a href="#timer">Timer</a>
+        </nav>
+    </header>
+
+    <section id="login">
         <h2>Password Login</h2>
-        <form action="/login" method="post">
-            <input type="password" name="password" placeholder="Enter your password" required>
-            <input type="submit" value="Login">
-        </form>
-    </div>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="loginResult"></p>
+    </section>
+
+    <section id="poem" style="display:none;">
+        <h2>Poem</h2>
+        <p>dear hanona my pretty princess love youuuuuuuuuuuuuuuuuuuuuuuu would you be my valentine</p>
+    </section>
+
+    <section id="gallery" style="display:none;">
+        <h2>Gallery</h2>
+        <p>Placeholder for photos: <img src="path/to/photo1.jpg" alt="Photo 1"><img src="path/to/photo2.jpg" alt="Photo 2"></p>
+    </section>
+
+    <section id="music" style="display:none;">
+        <h2>Music</h2>
+        <p>Listen to our song: <a href="https://open.spotify.com" target="_blank">Spotify Link</a></p>
+    </section>
+
+    <section id="timer" style="display:none;">
+        <h2>Countdown Timer</h2>
+        <p id="countdown"></p>
+    </section>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === '4/24') {
+                document.getElementById('loginResult').innerText = 'Access Granted!';
+                document.getElementById('poem').style.display = '';
+                document.getElementById('gallery').style.display = '';
+                document.getElementById('music').style.display = '';
+                document.getElementById('timer').style.display = '';
+                startTimer();
+            } else {
+                document.getElementById('loginResult').innerText = 'Access Denied!';
+            }
+        }
+
+        function startTimer() {
+            const countDownDate = new Date('October 13, 2025').getTime();
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
